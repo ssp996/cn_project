@@ -6,3 +6,7 @@ uv.lock
 .venv/
 .vscode/
 .python-version
+
+test/
+__pycache__/
+
