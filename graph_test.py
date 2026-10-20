@@ -1,5 +1,7 @@
 import graph_builder
 
+#hosts, switches and links will be provided by ryu api
+
 switches = [
     {
         "dpid": "0000000000000001",
@@ -67,6 +69,7 @@ hosts = [
     },
 ]
 
+#probe result from diagnostic
 probe_result = {
     "src": "h1",
     "dst": "h2",
