@@ -1,8 +1,8 @@
 src/
 
-pyproject.toml
-uv.lock
-
 .venv/
 .vscode/
 .python-version
+
+__pycache__/
+results/*.json
