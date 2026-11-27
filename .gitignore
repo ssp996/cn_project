@@ -1,5 +1,8 @@
 src/
 
+pyproject.toml
+uv.lock
+
 .venv/
 .vscode/
 .python-version

@@ -1,0 +1,62 @@
+[
+  {
+    "src": "h1",
+    "dst": "h2",
+    "path": [
+      "s1",
+      "s2",
+      "s4"
+    ],
+    "probe_timestamp": 1794765754,
+    "rtt_min_ms": 20.362,
+    "rtt_avg_ms": 20.516,
+    "rtt_max_ms": 21.409,
+    "jitter_ms": 0.109,
+    "loss_pct": 0.0
+  },
+  {
+    "src": "h1",
+    "dst": "h2",
+    "path": [
+      "s1",
+      "s3",
+      "s4"
+    ],
+    "probe_timestamp": 1794765808,
+    "rtt_min_ms": 80.403,
+    "rtt_avg_ms": 80.578,
+    "rtt_max_ms": 80.827,
+    "jitter_ms": 0.102,
+    "loss_pct": 0.0
+  },
+  {
+    "src": "h1",
+    "dst": "h2",
+    "path": [
+      "s1",
+      "s2",
+      "s4"
+    ],
+    "probe_timestamp": 1794765852,
+    "rtt_min_ms": 20.19,
+    "rtt_avg_ms": 20.331,
+    "rtt_max_ms": 20.58,
+    "jitter_ms": 0.076,
+    "loss_pct": 0.0
+  },
+  {
+    "src": "h1",
+    "dst": "h2",
+    "path": [
+      "s1",
+      "s2",
+      "s4"
+    ],
+    "probe_timestamp": 1794765938,
+    "rtt_min_ms": 20.328,
+    "rtt_avg_ms": 20.474,
+    "rtt_max_ms": 21.457,
+    "jitter_ms": 0.107,
+    "loss_pct": 18.0
+  }
+]

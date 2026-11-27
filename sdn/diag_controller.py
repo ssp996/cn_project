@@ -24,6 +24,7 @@ CONGESTION_WEIGHT = 100.0
 HOP_WEIGHT = 1.0
 REROUTE_COOLDOWN = 3.0
 MIN_UTILIZATION_SAMPLES = 2
+NOISE_FLOOR = 0.05             # ignore utilization below 5% when choosing routes (probe/ARP noise)
 STATS_MAX_AGE = 5.0
 
 
@@ -153,7 +154,12 @@ class DiagController(app_manager.RyuApp):
         return stats['utilization']
 
     def _link_cost(self, src, dst):
-        util = self._link_utilization(src, dst)
+        # Flows are installed in both directions, so congestion in either
+        # direction (e.g. a one-way UDP stream) must count against the link.
+        util = max(self._link_utilization(src, dst),
+                   self._link_utilization(dst, src))
+        if util < NOISE_FLOOR:
+            util = 0.0  # tiny background traffic must not break the tie between equal routes
         return HOP_WEIGHT + CONGESTION_WEIGHT * util * util
 
     def _best_path(self, src, dst):
@@ -189,6 +195,12 @@ class DiagController(app_manager.RyuApp):
         return max(self._link_utilization(path[i], path[i + 1])
                    for i in range(len(path) - 1))
 
+    def _path_utilization_bidir(self, path):
+        if not path or len(path) < 2:
+            return 0.0
+        return max(self._path_utilization(path),
+                   self._path_utilization(path[::-1]))
+
     def _check_active_paths(self):
         checked = set()
         for (src_mac, dst_mac), path in list(self.active_paths.items()):
@@ -199,7 +211,7 @@ class DiagController(app_manager.RyuApp):
             src_loc, dst_loc = self.host_loc.get(src_mac), self.host_loc.get(dst_mac)
             if not src_loc or not dst_loc or not path:
                 continue
-            current_util = self._path_utilization(path)
+            current_util = self._path_utilization_bidir(path)
             if current_util < CONGESTION_THRESHOLD:
                 continue
             now = time.time()
@@ -208,7 +220,7 @@ class DiagController(app_manager.RyuApp):
             new_path = self._best_path(src_loc[0], dst_loc[0])
             if not new_path or new_path == path:
                 continue
-            new_util = self._path_utilization(new_path)
+            new_util = self._path_utilization_bidir(new_path)
             if new_util >= CLEAR_THRESHOLD:
                 self.logger.warning('Congestion detected on %s -> %s, but no measured alternative below %.0f%%; best=%s at %.1f%%',
                                     src_mac, dst_mac, CLEAR_THRESHOLD * 100,

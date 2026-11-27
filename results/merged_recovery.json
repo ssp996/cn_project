@@ -1,0 +1,57 @@
+{
+  "src": "h1",
+  "dst": "h2",
+  "path": [
+    "s1",
+    "s2",
+    "s4"
+  ],
+  "alternative_paths": [
+    [
+      "s1",
+      "s3",
+      "s4"
+    ]
+  ],
+  "rtt_avg_ms": 20.331,
+  "loss_pct": 0.0,
+  "max_link_utilization_percent": 0.01,
+  "congested": false,
+  "status": "OK",
+  "failed_links": [],
+  "failed_paths": [],
+  "path_comparison": [
+    {
+      "path": [
+        "s1",
+        "s2",
+        "s4"
+      ],
+      "rtt_avg_ms": 20.331,
+      "rtt_min_ms": 20.19,
+      "rtt_max_ms": 20.58,
+      "jitter_ms": 0.076,
+      "loss_pct": 0.0,
+      "active": true,
+      "failed": false,
+      "best": true
+    },
+    {
+      "path": [
+        "s1",
+        "s3",
+        "s4"
+      ],
+      "rtt_avg_ms": 80.578,
+      "rtt_min_ms": 80.403,
+      "rtt_max_ms": 80.827,
+      "jitter_ms": 0.102,
+      "loss_pct": 0.0,
+      "active": false,
+      "failed": false,
+      "best": false
+    }
+  ],
+  "probe_age_s": 5.4,
+  "warnings": []
+}

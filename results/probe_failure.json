@@ -1,0 +1,16 @@
+{
+  "src": "h1",
+  "dst": "h2",
+  "dst_ip": "10.0.0.2",
+  "port": 5005,
+  "timestamp": 1794765808,
+  "sent": 100,
+  "recv": 100,
+  "lost": 0,
+  "loss_pct": 0.0,
+  "rtt_min_ms": 80.403,
+  "rtt_avg_ms": 80.578,
+  "rtt_max_ms": 80.827,
+  "jitter_ms": 0.102,
+  "lost_seqs": []
+}
