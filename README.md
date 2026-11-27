@@ -254,11 +254,12 @@ These values are from the supplied project run; they are illustrative rather tha
 
 | Scenario | Active switch path | Average RTT | Packet loss | Analysis status |
 |---|---|---:|---:|---|
-| Normal | `s1 → s2 → s4` | 20.501 ms | 0% | `OK` |
-| `s2–s4` down | `s1 → s3 → s4` | 80.508 ms | 0% | `REROUTED_AFTER_FAILURE` |
-| Recovered | `s1 → s2 → s4` | 20.476 ms | 0% | `OK` |
+| Normal | `s1 → s2 → s4` | 20.516 ms | 0% | `OK` |
+| `s2–s4` down | `s1 → s3 → s4` | 80.578 ms | 0% | `REROUTED_AFTER_FAILURE` |
+| Recovered | `s1 → s2 → s4` | 20.331 ms | 0% | `OK` |
+| Packet-loss injection (20% configured) | `s1 → s2 → s4` | 20.474 ms | 18% | `DEGRADED` |
 
-The supplied `probe_loss.json` records **0% observed loss** in that particular run. The packet-loss feature and injection procedure are implemented, but a live nonzero-loss run is needed if you want an example demonstrating `DEGRADED` in the repository.
+In the packet-loss run, 82 of 100 probes were echoed (18 lost), close to the configured 20% (netem loss is random, so the observed value varies). Loss exceeds the 10% threshold, so `analyze.py` reports `DEGRADED`. RTT stays near 20 ms because the loss was applied on the active upper path and delay is unchanged.
 
 ### Generated outputs
 
